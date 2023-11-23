@@ -25,9 +25,25 @@ export function registries(env: Env): RegistryConfiguration[] {
   }
 }
 
-// RegistryHTTPClient implements a registry client that is able to pull/push to the configured registry
-export class RegistryHTTPClient {
-  constructor(private env: Env, private configuration: RegistryConfiguration) {}
+// Registry error contains an HTTP response that is returned by the underlying registry implementation
+export type RegistryError = {
+  response: Response;
+};
 
-  // todo: implementation
+// Response of manifestExists call
+export type CheckManifestResponse =
+  | {
+      exists: true;
+
+      digest: string;
+    }
+  | {
+      exists: false;
+    }
+  | RegistryError;
+
+// Registry interface to an implementation
+export interface Registry {
+  // checks whether the manifest exists in the registry
+  manifestExists(namespace: string, tag: string): Promise<CheckManifestResponse>;
 }
