@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@tsndr/cloudflare-worker-jwt": "^2.2.1",
-    "itty-router": "^4.0.9",
+    "itty-router": "^4.0.25",
     "zod": "^3.22.4"
   },
   "devDependencies": {
